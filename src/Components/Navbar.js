@@ -1,51 +1,122 @@
-import React from 'react';
+import React from "react";
+// import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+// import { AuthContext } from "../../contexts/AuthProvider";
+// import BrandImage from "../../assets/Name.png";
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { useState } from "react";
+import {MdDarkMode , MdOutlineLightMode} from "react-icons/md"
 
 const Navbar = () => {
-    return (
-        <div className="navbar bg-base-100">
-  <div className="navbar-start">
-    <div className="dropdown">
-      <label tabIndex={0} className="btn btn-ghost lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-      </label>
-      <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a>Item 1</a></li>
-        <li tabIndex={0}>
-          <a className="justify-between">
-            Parent
-            <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
-          </a>
-          <ul className="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
+  // const { logOut, user } = useContext(AuthContext);
+  const [user ,setUser] = useState('')
+  const [open, setOpen] = useState(false);
+  
+  let activeStyle = {
+    textDecoration: "underline",
+  };
+
+  
+
+  const handleMenuBar = () => {
+    setOpen(!open);
+  };
+
+  // const handleLogOut = () => {
+  //   logOut()
+  //     .then(() => {})
+  //     .catch((error) => console.error(error));
+  // };
+
+  return (
+    <div className="bg-[#8084ef] text-white h-20 md:p-5  flex justify-around ">
+      <div className="flex md:mt-0 mt-4">
+        <h1 className="text-2xl">PhoneMind</h1>
+        {/* <img src={BrandImage} className="rounded-xl h-10  w-9 ml-3" alt="" /> */}
+      </div>
+
+      <ul
+        className={` md:flex text-black ml-40 ease-in duration-500  bg-[#8084ef] px-36 md:mr-0 mr-40 md:p-0 md:static z-[20] absolute ${
+          open ? "top-20 " : "top-[-250px]"
+        }`}
+      >
+        {user?.photoURL && (
+          <li>
+            {" "}
+            <Link className="">
+            <div className="tooltip tooltip-bottom" data-tip={user?.displayName}>
+
+        
+              <img
+                src={user?.photoURL}
+                alt=""
+                className="w-10 h-10 rounded-xl"
+              />    </div>
+            </Link>
+          </li>
+        )}
+        <li>
+          <NavLink to="/home" className="ml-3 "
+           style={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            }>
+            Home
+          </NavLink>
         </li>
-        <li><a>Item 3</a></li>
+        <li>
+          <NavLink className="ml-3" to="/course" style={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            }>
+           Cart
+          </NavLink>
+        </li>
+
+        {user?.uid ? (
+          <li>
+            <Link className="ml-3" onClick=''>
+              LogOut
+            </Link>
+          </li>
+        ) : (
+          <>
+            <li>
+              <NavLink className="ml-3" to="/register" style={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            }>
+                Register
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="ml-3" to="/login" style={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            }>
+                Login
+              </NavLink>
+            </li>
+          </>
+        )}
+        {/* <li>
+          {" "}
+          <NavLink className="ml-3" to='/blog' style={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            }>Blog</NavLink>
+        </li> */}
+        {/* <li>
+          <NavLink className="ml-3"  to='/faq'  style={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            }>FAQ</NavLink>
+        </li> */}
+        {/* <li onClick={handleTheme} className="text-xl ml-3">
+           {theme ? <MdOutlineLightMode /> : <MdDarkMode  />}
+        </li> */}
       </ul>
+      <div className="md:hidden mt-5 text-xl text-black" onClick={handleMenuBar}>
+        {open ? <AiOutlineClose /> : <AiOutlineMenu />}
+      </div>
+
+   
     </div>
-    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
-  </div>
-  <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1">
-      <li><a>Item 1</a></li>
-      <li tabIndex={0}>
-        <a>
-          Parent
-          <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
-        </a>
-        <ul className="p-2">
-          <li><a>Submenu 1</a></li>
-          <li><a>Submenu 2</a></li>
-        </ul>
-      </li>
-      <li><a>Item 3</a></li>
-    </ul>
-  </div>
-  <div className="navbar-end">
-    <a className="btn">Get started</a>
-  </div>
-</div>
-    );
+  );
 };
 
 export default Navbar;
