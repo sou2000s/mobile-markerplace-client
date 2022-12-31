@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { AuthContext } from '../Contexts/AuthProvider';
 import Products from './Products';
 
 const Home = () => {
+  const {user} = useContext(AuthContext)
+
    const [products , setProducts] = useState([])
    useEffect(()=>{
     fetch('http://localhost:5000/products')
@@ -9,7 +13,30 @@ const Home = () => {
     .then(data => setProducts(data))
    } , [])
 
-
+const handleAddToCart = (product)=>{
+      if(!user?.email){
+         toast.error('login first')
+         return;
+      }
+  console.log(product);
+  const addededProduct = {
+       name: product.name,
+       price: product.price,
+       image: product.image,
+       productId: product._id,
+       buyrEamil:user?.email 
+  }
+  fetch('http://localhost:5000/addToCart',{
+    method:"POST",
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(addededProduct)
+  })
+  .then(res => res.json())
+  .then(data => console.log(data))
+   
+}
 
     return (
         <div>
@@ -31,7 +58,7 @@ const Home = () => {
 </section>
    <h1 className='text-center text-4xl'>Products</h1>
 <div className='grid md:grid-cols-3 gap-4 md:ml-52 place-content-center '>
-    {products.map(product =>  <Products product={product} key={product._id}/> )}
+    {products.map(product =>  <Products handleAddToCart={handleAddToCart} product={product} key={product._id}/> )}
 </div>
         </div>
     );

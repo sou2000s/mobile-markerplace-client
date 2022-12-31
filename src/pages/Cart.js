@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../Contexts/AuthProvider';
 
 const Cart = () => {
-    const {test} = useContext(AuthContext)
+    const {} = useContext(AuthContext)
     return (
         <div>
             <h1>Cart</h1>

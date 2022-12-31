@@ -1,17 +1,20 @@
-import React from "react";
-// import { useContext } from "react";
+import React, { useContext } from "react";
+
 import { Link, NavLink } from "react-router-dom";
-// import { AuthContext } from "../../contexts/AuthProvider";
-// import BrandImage from "../../assets/Name.png";
+
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
-import {MdDarkMode , MdOutlineLightMode} from "react-icons/md"
+
+import { AuthContext } from "../Contexts/AuthProvider";
+import { useUserRole } from "../Hooks/useUserRole";
 
 const Navbar = () => {
   // const { logOut, user } = useContext(AuthContext);
-  const [user ,setUser] = useState('')
+  const {logout , user} = useContext(AuthContext)
+  // const [user ,setUser] = useState('')
   const [open, setOpen] = useState(false);
-  
+  const [userRole] =  useUserRole(user?.email)
+  console.log(user?.email);
   let activeStyle = {
     textDecoration: "underline",
   };
@@ -22,11 +25,11 @@ const Navbar = () => {
     setOpen(!open);
   };
 
-  // const handleLogOut = () => {
-  //   logOut()
-  //     .then(() => {})
-  //     .catch((error) => console.error(error));
-  // };
+  const handleLogOut = () => {
+    logout()
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
 
   return (
     <div className="bg-[#8084ef] text-white h-20 md:p-5  flex justify-around ">
@@ -40,21 +43,7 @@ const Navbar = () => {
           open ? "top-20 " : "top-[-250px]"
         }`}
       >
-        {user?.photoURL && (
-          <li>
-            {" "}
-            <Link className="">
-            <div className="tooltip tooltip-bottom" data-tip={user?.displayName}>
-
         
-              <img
-                src={user?.photoURL}
-                alt=""
-                className="w-10 h-10 rounded-xl"
-              />    </div>
-            </Link>
-          </li>
-        )}
         <li>
           <NavLink to="/" className="ml-3 "
            style={({ isActive }) =>
@@ -63,17 +52,32 @@ const Navbar = () => {
             Home
           </NavLink>
         </li>
-        <li>
+       {user?.email && userRole === "User" && 
+       
+       <li>
           <NavLink className="ml-3" to="/cart" style={({ isActive }) =>
               isActive ? activeStyle : undefined
             }>
            Cart
           </NavLink>
         </li>
+        
+       
+       }
+
+        {user?.email && userRole === "Seller" && 
+       
+       <li>
+          <NavLink className="ml-3" to="/addProducts" style={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            }>
+           Add products
+          </NavLink>
+        </li>}
 
         {user?.uid ? (
           <li>
-            <Link className="ml-3" onClick=''>
+            <Link className="ml-3" onClick={handleLogOut}>
               LogOut
             </Link>
           </li>

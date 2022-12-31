@@ -3,7 +3,7 @@ import { json, Link } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 
 const Register = () => {
-   const {createUser} = useContext(AuthContext)
+   const {createUser , setUserNameAndProfile} = useContext(AuthContext)
     const handleRegister = (e)=>{
         e.preventDefault()
         console.log(e.target);
@@ -21,6 +21,8 @@ const Register = () => {
                 role: role
             }
 
+            handleUserName(name)
+          console.log(res.user);
             fetch('http://localhost:5000/users' , {
                 method:"PUT",
                 headers: {
@@ -33,6 +35,16 @@ const Register = () => {
         })
         .catch(err => console.log(err.message))
     }
+
+ const handleUserName = (name) =>{
+      const userName = {
+        displayName : name
+      }
+      setUserNameAndProfile(userName)
+      .then(res=> console.log(res))
+      .catch(err => console.log(err.message))
+ }
+
 
     return (
         <div className="hero min-h-screen bg-base-200">
