@@ -10,7 +10,7 @@ import { useUserRole } from "../Hooks/useUserRole";
 
 const Navbar = () => {
   // const { logOut, user } = useContext(AuthContext);
-  const {logout , user} = useContext(AuthContext)
+  const {logout , user , cart} = useContext(AuthContext)
   // const [user ,setUser] = useState('')
   const [open, setOpen] = useState(false);
   const [userRole] =  useUserRole(user?.email)
@@ -34,7 +34,7 @@ const Navbar = () => {
   return (
     <div className="bg-[#8084ef] text-white h-20 md:p-5  flex justify-around ">
       <div className="flex md:mt-0 mt-4">
-        <h1 className="text-2xl">PhoneMind</h1>
+        <Link className="text-2xl" to='/'>PhoneMind</Link>
         {/* <img src={BrandImage} className="rounded-xl h-10  w-9 ml-3" alt="" /> */}
       </div>
 
@@ -58,7 +58,7 @@ const Navbar = () => {
           <NavLink className="ml-3" to="/cart" style={({ isActive }) =>
               isActive ? activeStyle : undefined
             }>
-           Cart
+           Cart {cart}
           </NavLink>
         </li>
         

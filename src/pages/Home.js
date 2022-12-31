@@ -4,7 +4,7 @@ import { AuthContext } from '../Contexts/AuthProvider';
 import Products from './Products';
 
 const Home = () => {
-  const {user} = useContext(AuthContext)
+  const {user , cart,setCart} = useContext(AuthContext)
 
    const [products , setProducts] = useState([])
    useEffect(()=>{
@@ -24,7 +24,8 @@ const handleAddToCart = (product)=>{
        price: product.price,
        image: product.image,
        productId: product._id,
-       buyrEamil:user?.email 
+       buyrEamil:user?.email ,
+       buyrName: user?.displayName
   }
   fetch('http://localhost:5000/addToCart',{
     method:"POST",
@@ -34,7 +35,15 @@ const handleAddToCart = (product)=>{
     body: JSON.stringify(addededProduct)
   })
   .then(res => res.json())
-  .then(data => console.log(data))
+  .then(data => {
+   
+       if(data.acknowledged ){
+           toast.success('successfully adeded')
+           
+         setCart(cart + 1)
+       }
+
+  })
    
 }
 

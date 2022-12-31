@@ -8,6 +8,7 @@ const AuthProvider = ({children}) => {
     const [user , setUser] = useState(null)
     const [userProfile , setUserProfile] = useState() 
     const [loading  , setLoading] = useState(true)
+    const [cart , setCart] = useState(0)
 
      const test = {name: "Taa"}
    
@@ -49,7 +50,7 @@ const AuthProvider = ({children}) => {
         return ()=> unsubscribe()
     } , [userProfile])
  
-    const authInfo = { test,createUser ,setUserNameAndProfile , logout , loading , setLoading , login , user , setUserProfile  , setUser , googleAuthentication} 
+    const authInfo = { cart , setCart,createUser ,setUserNameAndProfile , logout , loading , setLoading , login , user , setUserProfile  , setUser , googleAuthentication} 
 
 
 
