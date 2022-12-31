@@ -56,7 +56,7 @@ const Navbar = () => {
           </li>
         )}
         <li>
-          <NavLink to="/home" className="ml-3 "
+          <NavLink to="/" className="ml-3 "
            style={({ isActive }) =>
               isActive ? activeStyle : undefined
             }>
@@ -64,7 +64,7 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink className="ml-3" to="/course" style={({ isActive }) =>
+          <NavLink className="ml-3" to="/cart" style={({ isActive }) =>
               isActive ? activeStyle : undefined
             }>
            Cart
