@@ -9,6 +9,7 @@ const AuthProvider = ({children}) => {
     const [userProfile , setUserProfile] = useState() 
     const [loading  , setLoading] = useState(true)
 
+     const test = {name: "Taa"}
    
     const googleProvider  = new GoogleAuthProvider()
 
@@ -48,7 +49,7 @@ const AuthProvider = ({children}) => {
         return ()=> unsubscribe()
     } , [userProfile])
  
-    const authInfo = {createUser ,setUserNameAndProfile , logout , loading , setLoading , login , user , setUserProfile  , setUser , googleAuthentication} 
+    const authInfo = { test,createUser ,setUserNameAndProfile , logout , loading , setLoading , login , user , setUserProfile  , setUser , googleAuthentication} 
 
 
 
