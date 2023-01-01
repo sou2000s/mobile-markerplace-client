@@ -10,7 +10,7 @@ const AuthProvider = ({children}) => {
     const [loading  , setLoading] = useState(true)
     const [cart , setCart] = useState(0)
 
-     const test = {name: "Taa"}
+    
    
     const googleProvider  = new GoogleAuthProvider()
 
@@ -26,7 +26,7 @@ const AuthProvider = ({children}) => {
     }
   
     const setUserNameAndProfile = (profile)=>{
-
+              setLoading(true)
         return updateProfile(auth.currentUser , profile)
     }
     

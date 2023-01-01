@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 
 const Login = () => {
  const {login} = useContext(AuthContext)
+ const location = useLocation()
+    const from = location.state?.from?.pathname || "/" 
+ 
  const navigate = useNavigate()
  
  
@@ -14,7 +17,7 @@ const Login = () => {
     const password = e.target.password.value;
     login(email,password)
     .then(res => {
-        navigate('/')
+      navigate(from, { replace: true })
     })
     .catch(err => console.log(err.message))
  }
@@ -40,7 +43,7 @@ const Login = () => {
                 </label>
                 <input type="password" name='password' placeholder="password" className="input input-bordered" />
                 <label className="label">
-                  <Link href="#" className="label-text-alt link link-hover">Dont have account register?</Link>
+                  <Link href="#" className="label-text-alt link link-hover" to='/register'>Dont have account register?</Link>
                 </label>
               </div>
               

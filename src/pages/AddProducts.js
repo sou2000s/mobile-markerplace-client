@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import Footer from '../Components/Footer';
 import Spinner from '../Components/Spinner';
 import { AuthContext } from '../Contexts/AuthProvider';
 
@@ -42,7 +43,7 @@ const [productUploading , setProductUploading] = useState(false)
   
 
 
-    fetch('http://localhost:5000/addproducts' , {
+    fetch('https://phonemindapi.vercel.app/addproducts' , {
       method: 'POST',
       headers: {
         "content-type": 'application/json',
@@ -131,7 +132,9 @@ const [productUploading , setProductUploading] = useState(false)
         </div>
       </div>
      
-     
+      <div className='mt-64'>
+                <Footer/>
+             </div>
     </div>
     );
 };

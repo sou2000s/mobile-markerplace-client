@@ -1,9 +1,14 @@
-import React, { useContext } from 'react';
-import { json, Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { json, Link, Navigate, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
+import { useUserRole } from '../Hooks/useUserRole';
 
 const Register = () => {
    const {createUser , setUserNameAndProfile} = useContext(AuthContext)
+   const [err , setErr] = useState('') 
+   const [setuserRoleLoading] = useUserRole()
+   const navigate = useNavigate()
+
     const handleRegister = (e)=>{
         e.preventDefault()
         console.log(e.target);
@@ -20,10 +25,11 @@ const Register = () => {
                 email: res.user.email,
                 role: role
             }
-
+            setErr("")
             handleUserName(name)
+            // setuserRoleLoading(true)
           console.log(res.user);
-            fetch('http://localhost:5000/users' , {
+            fetch('https://phonemindapi.vercel.app/users' , {
                 method:"PUT",
                 headers: {
                     'content-type': "application/json"
@@ -31,9 +37,12 @@ const Register = () => {
                 body: JSON.stringify(user)
             })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+              console.log(data)
+              navigate('/')
+            })
         })
-        .catch(err => console.log(err.message))
+        .catch(err => setErr(err.message))
     }
 
  const handleUserName = (name) =>{
@@ -84,10 +93,11 @@ const Register = () => {
         <option>Seller</option>
           </select>
         </div>
-        
+         {err && <p className='text-red-700'>{err}</p>}
         <div className="form-control mt-6">
           <button type='submit' className="btn btn-primary">Register</button>
         </div>
+        <Link to='/login'>Allready have account?Login</Link>
       </div>
     </form>
   </div>

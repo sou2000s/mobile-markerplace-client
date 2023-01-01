@@ -11,7 +11,7 @@ const SellerRoute = ({children}) => {
         return <div>loading......</div>
     }
 
-    if(!user && userRole !== "Seller Accout"){
+    if(!user && userRole !== "Seller"){
         return  <Navigate to='/login' state={{ from: location }} replace ></Navigate>
     }
     return children;

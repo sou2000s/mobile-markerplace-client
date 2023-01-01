@@ -32,14 +32,14 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-[#8084ef] text-white h-20 md:p-5  flex justify-around ">
+    <div className="bg-[#8084ef] text-white h-20 md:p-5 sticky top-0 z-50  flex justify-around ">
       <div className="flex md:mt-0 mt-4">
         <Link className="text-2xl" to='/'>PhoneMind</Link>
         {/* <img src={BrandImage} className="rounded-xl h-10  w-9 ml-3" alt="" /> */}
       </div>
 
       <ul
-        className={` md:flex text-black ml-40 ease-in duration-500  bg-[#8084ef] px-36 md:mr-0 mr-40 md:p-0 md:static z-[20] absolute ${
+        className={` md:flex text-white ml-40 ease-in duration-500  bg-[#8084ef] px-36 md:mr-0 mr-40 md:p-0 md:static z-[20] absolute ${
           open ? "top-20 " : "top-[-250px]"
         }`}
       >
@@ -52,7 +52,7 @@ const Navbar = () => {
             Home
           </NavLink>
         </li>
-       {user?.email && userRole === "User" && 
+       {user?.email && userRole === "User" &&
        
        <li>
           <NavLink className="ml-3" to="/cart" style={({ isActive }) =>
@@ -60,7 +60,7 @@ const Navbar = () => {
             }>
            Cart {cart}
           </NavLink>
-        </li>
+        </li> 
         
        
        }
