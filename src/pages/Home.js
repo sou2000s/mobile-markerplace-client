@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import Contact from '../Components/Contact';
+import Footer from '../Components/Footer';
 import { AuthContext } from '../Contexts/AuthProvider';
 import Products from './Products';
 
@@ -69,6 +71,17 @@ const handleAddToCart = (product)=>{
 <div className='grid md:grid-cols-3 gap-4 md:ml-52 place-content-center '>
     {products.map(product =>  <Products handleAddToCart={handleAddToCart} product={product} key={product._id}/> )}
 </div>
+ 
+ <div className='mt-10'>
+ <h1 className='text-center text-2xl'>Stay contected</h1>
+        <p className='text-center'>Get updated with new phones subscribe our email notification!!</p>
+
+       <Contact/>
+ </div>
+
+ <div className='mt-6'>
+ <Footer/>
+ </div>
         </div>
     );
 };
