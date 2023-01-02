@@ -6,7 +6,7 @@ import Spinner from '../Components/Spinner';
 import { AuthContext } from '../Contexts/AuthProvider';
 
 const AddProducts = () => {
-const {user} = useContext(AuthContext)
+
 const [productUploading , setProductUploading] = useState(false)
 
   const handleAddProduct = (e) => {
@@ -43,7 +43,7 @@ const [productUploading , setProductUploading] = useState(false)
   
 
 
-    fetch('https://phonemindapi.vercel.app/addproducts' , {
+    fetch('http://localhost:5000/addproducts' , {
       method: 'POST',
       headers: {
         "content-type": 'application/json',

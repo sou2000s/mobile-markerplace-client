@@ -7,18 +7,22 @@ import Register from "../pages/Register";
 import AddProducts from "../pages/AddProducts";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SellerRoute from "./PrivateRoute/SellerRoute";
+
 const routes = createBrowserRouter([
      {
         path:"/",
         element: <Main/>,
         children: [
             {path:'/' , element:<Home/>},
-            {path:"/cart" , element:<PrivateRoute><Cart/></PrivateRoute>},
+            {path:"/cart" , element:<Cart/>},
             {path:"/login" , element:<Login/>},
             {path:"/register" , element:<Register/>},
-            {path:'/addProducts' , element:<SellerRoute><AddProducts/></SellerRoute>}
+            {path:'/addProducts' , element:<AddProducts/>},
         ]
-     }
+     },
+     
+        
+     
            
 
 

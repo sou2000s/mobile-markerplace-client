@@ -4,13 +4,14 @@ import { AuthContext } from '../Contexts/AuthProvider';
 import { useUserRole } from '../Hooks/useUserRole';
 
 const Register = () => {
-   const {createUser , setUserNameAndProfile} = useContext(AuthContext)
+   const {createUser , setUserNameAndProfile } = useContext(AuthContext)
    const [err , setErr] = useState('') 
-   const [setuserRoleLoading] = useUserRole()
+   const [userRole , setuserRole] = useUserRole();
    const navigate = useNavigate()
-
+  
     const handleRegister = (e)=>{
         e.preventDefault()
+   
         console.log(e.target);
         const name = e.target.name.value;
         const email = e.target.email.value;
@@ -20,17 +21,26 @@ const Register = () => {
           
         createUser(email , password)
         .then(res => {
-            const user = {
+          console.log(res.user);
+          const user = {
                 name: name,
                 email: res.user.email,
                 role: role
             }
             setErr("")
             handleUserName(name)
-            // setuserRoleLoading(true)
-          console.log(res.user);
-            fetch('https://phonemindapi.vercel.app/users' , {
-                method:"PUT",
+            // setuserRole(role)
+
+            fetch(`http://localhost:5000/users/role/${res.user.email}`)
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data);
+            setuserRole(data.role)
+           
+        })
+         
+            fetch('http://localhost:5000/users' , {
+                method:"POST",
                 headers: {
                     'content-type': "application/json"
                 },
@@ -40,6 +50,7 @@ const Register = () => {
             .then(data => {
               console.log(data)
               navigate('/')
+             
             })
         })
         .catch(err => setErr(err.message))
@@ -89,7 +100,7 @@ const Register = () => {
             <span className="label-text">Select your role</span>
           </label>
           <select name='role' className="select select-bordered w-full max-w-xs">
-        <option  selected>User</option>
+        <option>User</option>
         <option>Seller</option>
           </select>
         </div>

@@ -8,7 +8,7 @@ const Cart = () => {
    
 //     const [cartProducts , setCartProducts] = useState([])
 //     useEffect(()=>{
-//    fetch(`https://phonemindapi.vercel.app/cartProducts/${user?.email}`)
+//    fetch(`http://localhost:5000/cartProducts/${user?.email}`)
 //    .then(res => res.json())
 //    .then(data => {
 //     setCartProducts(data)
@@ -20,7 +20,7 @@ const Cart = () => {
 const {data:cartProducts ,refetch } = useQuery({
     queryKey: ['useremail'],
     queryFn: async () =>{
-        const res = await fetch(`https://phonemindapi.vercel.app/cartProducts/${user?.email}`)
+        const res = await fetch(`http://localhost:5000/cartProducts/${user?.email}`)
         const data = await res.json()
         
         return data;
@@ -31,7 +31,7 @@ const {data:cartProducts ,refetch } = useQuery({
          console.log(product);
         //  total -= product.price
     //    refetch()
-    fetch(`https://phonemindapi.vercel.app/cartProductDelte/${product._id}` , {
+    fetch(`http://localhost:5000/cartProductDelte/${product._id}` , {
         method: "DELETE"
     })
     .then(res => res.json())

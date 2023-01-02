@@ -8,18 +8,22 @@ import { useState } from "react";
 import { AuthContext } from "../Contexts/AuthProvider";
 import { useUserRole } from "../Hooks/useUserRole";
 
-const Navbar = () => {
-  // const { logOut, user } = useContext(AuthContext);
-  const {logout , user , cart} = useContext(AuthContext)
+const Navbar = () => {''
+  // const { logOut, user } = useContext(AuthContext);'
+  const {logout , user , cart , setLoading ,loading} = useContext(AuthContext)
   // const [user ,setUser] = useState('')
   const [open, setOpen] = useState(false);
-  const [userRole] =  useUserRole(user?.email)
+  const [userRole , setuserRoleLoading] =  useUserRole(user?.email)
+  console.log(user);
   console.log(user?.email);
+  console.log(userRole);
+  // console.log(userRoleLoading);
+  
   let activeStyle = {
     textDecoration: "underline",
   };
 
-  
+  //  setuserRoleLoading(true)
 
   const handleMenuBar = () => {
     setOpen(!open);
@@ -52,7 +56,7 @@ const Navbar = () => {
             Home
           </NavLink>
         </li>
-       {user?.email && userRole === "User" &&
+        {user?.email  && userRole === "User" &&
        
        <li>
           <NavLink className="ml-3" to="/cart" style={({ isActive }) =>
@@ -65,7 +69,7 @@ const Navbar = () => {
        
        }
 
-        {user?.email && userRole === "Seller" && 
+        {user?.email  && userRole === "Seller" && 
        
        <li>
           <NavLink className="ml-3" to="/addProducts" style={({ isActive }) =>
@@ -73,7 +77,9 @@ const Navbar = () => {
             }>
            Add products
           </NavLink>
-        </li>}
+        </li>} 
+          
+        
 
         {user?.uid ? (
           <li>

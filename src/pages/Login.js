@@ -12,7 +12,7 @@ const Login = () => {
  
  const handleLogin = (e)=>{
     e.preventDefault()
-        console.log(e.target);
+    console.log(e.target);
     const email = e.target.email.value;
     const password = e.target.password.value;
     login(email,password)
