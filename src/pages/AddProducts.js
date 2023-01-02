@@ -43,7 +43,7 @@ const [productUploading , setProductUploading] = useState(false)
   
 
 
-    fetch('http://localhost:5000/addproducts' , {
+    fetch('https://phonemindapi.vercel.app/addproducts' , {
       method: 'POST',
       headers: {
         "content-type": 'application/json',

@@ -31,7 +31,7 @@ const Register = () => {
             handleUserName(name)
             // setuserRole(role)
 
-            fetch(`http://localhost:5000/users/role/${res.user.email}`)
+            fetch(`https://phonemindapi.vercel.app/users/role/${res.user.email}`)
         .then(res => res.json())
         .then(data =>{
             console.log(data);
@@ -39,7 +39,7 @@ const Register = () => {
            
         })
          
-            fetch('http://localhost:5000/users' , {
+            fetch('https://phonemindapi.vercel.app/users' , {
                 method:"POST",
                 headers: {
                     'content-type': "application/json"

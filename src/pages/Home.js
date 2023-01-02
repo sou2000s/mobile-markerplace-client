@@ -10,7 +10,7 @@ const Home = () => {
 
    const [products , setProducts] = useState([])
    useEffect(()=>{
-    fetch('http://localhost:5000/products')
+    fetch('https://phonemindapi.vercel.app/products')
     .then(res => res.json())
     .then(data => setProducts(data))
    } , [])
@@ -29,7 +29,7 @@ const handleAddToCart = (product)=>{
        buyrEamil:user?.email ,
        buyrName: user?.displayName
   }
-  fetch('http://localhost:5000/addToCart',{
+  fetch('https://phonemindapi.vercel.app/addToCart',{
     method:"POST",
     headers: {
       'content-type': 'application/json'
